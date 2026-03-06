@@ -23,15 +23,14 @@
                         sans: ['Kanit', 'sans-serif'] 
                     },
                     colors: { 
-                        brown: { 
-                            50: '#FAF6F0', 
-                            100: '#F5EBE1', 
-                            200: '#E6D5C3', 
-                            300: '#D6BFA5',
-                            400: '#C2A383', 
-                            500: '#A67C52', 
-                            600: '#8A5A33', 
-                            700: '#6B4222'
+                        pastel: { 
+                            50: '#fff0f5', 
+                            100: '#ffe4e1', 
+                            200: '#ffc0cb', 
+                            300: '#ffb6c1',
+                            400: '#ff69b4', 
+                            500: '#ff1493', 
+                            600: '#c71585' 
                         } 
                     }
                 }
@@ -42,87 +41,104 @@
     <style>
         body { 
             font-family: 'Kanit', sans-serif; 
-            background: linear-gradient(135deg, #FAF6F0 0%, #F5EBE1 100%); 
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%); 
             min-height: 100vh; 
             display: flex; 
             flex-direction: column; 
             overflow-x: hidden; 
         }
+        
         .glass { 
             background: rgba(255, 255, 255, 0.85); 
             backdrop-filter: blur(12px); 
             border: 2px solid rgba(255, 255, 255, 0.9); 
-            box-shadow: 0 10px 30px rgba(166, 124, 82, 0.1); 
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.1); 
         }
+        
         .cute-card { 
             border-radius: 2rem; 
             overflow: hidden; 
             transition: all 0.3s ease; 
         }
+        
         .cute-card:hover { 
             transform: translateY(-3px); 
-            box-shadow: 0 15px 25px rgba(166, 124, 82, 0.15); 
+            box-shadow: 0 15px 25px rgba(255, 105, 180, 0.15); 
         }
+        
         .hide-scrollbar::-webkit-scrollbar { 
             display: none; 
         }
+        
         .fade-transition { 
             transition: opacity 0.5s ease-in-out; 
         }
+        
         .text-gradient { 
             background-clip: text; 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
         }
         
+        /* Marquee Animation */
         .marquee-wrapper { 
             width: 100%; 
             overflow: hidden; 
             white-space: nowrap; 
             position: relative; 
         }
+        
         .marquee-text { 
             display: inline-block; 
             padding-left: 100%; 
             animation: marquee 25s linear infinite; 
         }
+        
         .marquee-wrapper:hover .marquee-text { 
             animation-play-state: paused; 
             cursor: default; 
         }
+        
         @keyframes marquee { 
             0% { transform: translateX(0); } 
             100% { transform: translateX(-100%); } 
         }
 
+        /* SweetAlert Styling - Pink Theme */
         .swal2-popup { 
             border-radius: 2rem !important; 
-            background: #FAF6F0 !important; 
-            border: 3px solid #D6BFA5; 
+            background: #fff0f5 !important; 
+            border: 3px solid #ffb6c1; 
             padding: 2rem !important; 
         }
+        
         .swal2-title { 
-            color: #8A5A33 !important; 
+            color: #c71585 !important; 
             font-family: 'Kanit', sans-serif !important; 
         }
+        
         .swal2-confirm, .swal2-cancel { 
             border-radius: 1.5rem !important; 
             font-family: 'Kanit', sans-serif !important; 
             font-weight: 600 !important; 
         }
+        
         .swal2-confirm { 
-            background: linear-gradient(to right, #C2A383, #A67C52) !important; 
-            box-shadow: 0 4px 15px rgba(166, 124, 82, 0.4) !important; 
+            background: linear-gradient(to right, #ff69b4, #ff1493) !important; 
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4) !important; 
         }
+        
         .swal2-close { 
-            color: #A67C52 !important; 
+            color: #ff69b4 !important; 
         }
+        
         .swal2-close:focus { 
             box-shadow: none !important; 
         }
+        
         .swal2-input, .swal2-select, .swal2-textarea { 
             border-radius: 1rem !important; 
-            border: 2px solid #D6BFA5 !important; 
+            border: 2px solid #ffb6c1 !important; 
         }
     </style>
 </head>
@@ -133,27 +149,27 @@
             
             <div class="flex items-center gap-3 cursor-pointer hover:scale-105 transition" onclick="navigate('home')">
                 <img id="nav-logo" src="https://img2.pic.in.th/2b8f301abf20d918faf512ee0dbf9271.jpeg" class="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md" loading="lazy">
-                <span id="nav-title" class="text-2xl font-bold bg-gradient-to-r from-brown-500 to-brown-700 text-gradient fade-transition tracking-wide">sorichard-store</span>
+                <span id="nav-title" class="text-2xl font-bold bg-gradient-to-r from-pastel-400 to-pastel-600 text-gradient fade-transition tracking-wide">beamstore</span>
             </div>
             
             <div class="flex items-center gap-4">
                 
                 <div id="guest-buttons" class="flex gap-2">
-                    <button onclick="openModal('login-modal')" class="bg-gradient-to-r from-brown-400 to-brown-500 hover:opacity-90 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition shadow-lg shadow-brown-200">
+                    <button onclick="openModal('login-modal')" class="bg-gradient-to-r from-pastel-400 to-pastel-500 hover:opacity-90 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition shadow-lg shadow-pink-200">
                         <i class="fa-solid fa-lock mr-1"></i> ล็อกอิน
                     </button>
                 </div>
                 
                 <div id="user-info" class="hidden text-right">
-                    <div class="text-sm font-semibold text-brown-600">
+                    <div class="text-sm font-semibold text-pastel-600">
                         <i class="fa-solid fa-user mr-1"></i> <span id="display-user"></span>
                     </div>
-                    <div class="text-xs text-gray-600 bg-white/80 px-3 py-1 rounded-full shadow-sm mt-0.5 border border-brown-100">
-                        <i class="fa-solid fa-coins text-yellow-600 mr-1"></i> <span id="display-balance" class="font-bold">0.00</span> ฿
+                    <div class="text-xs text-gray-600 bg-white/80 px-3 py-1 rounded-full shadow-sm mt-0.5 border border-pink-100">
+                        <i class="fa-solid fa-coins text-yellow-500 mr-1"></i> <span id="display-balance" class="font-bold">0.00</span> ฿
                     </div>
                 </div>
                 
-                <button onclick="toggleMenu()" class="w-10 h-10 rounded-full bg-white text-brown-500 hover:bg-brown-50 text-xl flex items-center justify-center transition shadow-md border border-brown-100">
+                <button onclick="toggleMenu()" class="w-10 h-10 rounded-full bg-white text-pastel-500 hover:bg-pastel-50 text-xl flex items-center justify-center transition shadow-md border border-pastel-100">
                     <i class="fa-solid fa-bars-staggered"></i>
                 </button>
                 
@@ -162,7 +178,7 @@
     </nav>
 
     <div class="mx-2 mt-2">
-        <div class="bg-gradient-to-r from-brown-300 to-brown-400 rounded-full text-white py-1.5 px-5 text-sm shadow-md flex items-center overflow-hidden">
+        <div class="bg-gradient-to-r from-pastel-300 to-pastel-400 rounded-full text-white py-1.5 px-5 text-sm shadow-md flex items-center overflow-hidden">
             <i class="fa-solid fa-bullhorn mr-3 animate-pulse flex-shrink-0"></i>
             <div class="marquee-wrapper">
                 <div class="marquee-text font-medium tracking-wide" id="marquee-text">
@@ -192,7 +208,7 @@
             </div>
         </div>
         <div class="glass p-3 rounded-[1.5rem] flex items-center gap-3 transition hover:scale-105">
-            <div class="w-10 h-10 rounded-full bg-brown-100 text-brown-600 flex items-center justify-center text-lg">
+            <div class="w-10 h-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center text-lg">
                 <i class="fa-solid fa-chart-line"></i>
             </div>
             <div>
@@ -214,33 +230,33 @@
     <div id="sidebar-backdrop" onclick="closeMenu()" class="fixed inset-0 bg-black/20 z-40 hidden backdrop-blur-sm transition-opacity"></div>
 
     <div id="sidebar" class="fixed inset-y-0 right-0 w-72 glass shadow-2xl transform translate-x-full transition-transform duration-300 z-50 rounded-l-[2rem]">
-        <div class="p-6 flex justify-between items-center border-b border-brown-200/50">
-            <h2 class="text-xl font-bold text-brown-600"><i class="fa-solid fa-compass mr-2"></i> เมนูนำทาง</h2>
-            <button onclick="closeMenu()" class="w-8 h-8 rounded-full bg-brown-50 text-brown-400 hover:bg-brown-100 flex items-center justify-center transition">
+        <div class="p-6 flex justify-between items-center border-b border-pastel-200/50">
+            <h2 class="text-xl font-bold text-pastel-600"><i class="fa-solid fa-compass mr-2"></i> เมนูนำทาง</h2>
+            <button onclick="closeMenu()" class="w-8 h-8 rounded-full bg-pastel-50 text-pastel-400 hover:bg-pastel-100 flex items-center justify-center transition">
                 <i class="fa-solid fa-times"></i>
             </button>
         </div>
         
         <div class="p-5 flex flex-col gap-3 overflow-y-auto hide-scrollbar pb-20">
-            <button onclick="navigate('home')" class="text-left px-5 py-3.5 rounded-[1.5rem] hover:bg-white transition text-gray-700 font-medium shadow-sm border border-transparent hover:border-brown-100">
-                <i class="fa-solid fa-house w-6 text-brown-400"></i> หน้าหลัก
+            <button onclick="navigate('home')" class="text-left px-5 py-3.5 rounded-[1.5rem] hover:bg-white transition text-gray-700 font-medium shadow-sm border border-transparent hover:border-pastel-100">
+                <i class="fa-solid fa-house w-6 text-pastel-400"></i> หน้าหลัก
             </button>
-            <button onclick="navigateAuth('inbox')" class="text-left px-5 py-3.5 rounded-[1.5rem] hover:bg-white transition text-gray-700 font-medium shadow-sm border border-transparent hover:border-brown-100">
-                <i class="fa-solid fa-envelope-open-text w-6 text-brown-400"></i> กล่องข้อความ
+            <button onclick="navigateAuth('inbox')" class="text-left px-5 py-3.5 rounded-[1.5rem] hover:bg-white transition text-gray-700 font-medium shadow-sm border border-transparent hover:border-pastel-100">
+                <i class="fa-solid fa-envelope-open-text w-6 text-pastel-400"></i> กล่องข้อความ
             </button>
-            <button onclick="navigateAuth('history')" class="text-left px-5 py-3.5 rounded-[1.5rem] hover:bg-white transition text-gray-700 font-medium shadow-sm border border-transparent hover:border-brown-100">
-                <i class="fa-solid fa-clock-rotate-left w-6 text-brown-400"></i> ประวัติการสั่งซื้อ
+            <button onclick="navigateAuth('history')" class="text-left px-5 py-3.5 rounded-[1.5rem] hover:bg-white transition text-gray-700 font-medium shadow-sm border border-transparent hover:border-pastel-100">
+                <i class="fa-solid fa-clock-rotate-left w-6 text-pastel-400"></i> ประวัติการสั่งซื้อ
             </button>
-            <button onclick="navigateAuth('products')" class="text-left px-5 py-3.5 rounded-[1.5rem] hover:bg-white transition text-gray-700 font-medium shadow-sm border border-transparent hover:border-brown-100">
-                <i class="fa-solid fa-gift w-6 text-brown-400"></i> สินค้าทั้งหมด
+            <button onclick="navigateAuth('products')" class="text-left px-5 py-3.5 rounded-[1.5rem] hover:bg-white transition text-gray-700 font-medium shadow-sm border border-transparent hover:border-pastel-100">
+                <i class="fa-solid fa-gift w-6 text-pastel-400"></i> สินค้าทั้งหมด
             </button>
-            <button onclick="navigateAuth('topup')" class="text-left px-5 py-3.5 rounded-[1.5rem] hover:bg-white transition text-gray-700 font-medium shadow-sm border border-transparent hover:border-brown-100">
-                <i class="fa-solid fa-wallet w-6 text-brown-400"></i> เติมเครดิต
+            <button onclick="navigateAuth('topup')" class="text-left px-5 py-3.5 rounded-[1.5rem] hover:bg-white transition text-gray-700 font-medium shadow-sm border border-transparent hover:border-pastel-100">
+                <i class="fa-solid fa-wallet w-6 text-pastel-400"></i> เติมเครดิต
             </button>
             
-            <div class="border-t my-2 border-brown-200/50"></div>
+            <div class="border-t my-2 border-pastel-200/50"></div>
             
-            <button id="menu-sell" onclick="navigateAuth('sell')" class="hidden text-left px-5 py-3.5 rounded-[1.5rem] hover:bg-white transition text-gray-700 font-medium shadow-sm border border-transparent hover:border-brown-100">
+            <button id="menu-sell" onclick="navigateAuth('sell')" class="hidden text-left px-5 py-3.5 rounded-[1.5rem] hover:bg-white transition text-gray-700 font-medium shadow-sm border border-transparent hover:border-pastel-100">
                 <i class="fa-solid fa-store w-6 text-green-500"></i> ลงขายสินค้า
             </button>
             
@@ -248,8 +264,8 @@
                 <i class="fa-solid fa-wand-magic-sparkles w-6 text-yellow-400"></i> จัดการระบบแอดมิน
             </button>
             
-            <button onclick="openLineContact()" class="text-left px-5 py-3.5 rounded-[1.5rem] hover:bg-white transition text-gray-700 font-medium shadow-sm border border-transparent hover:border-brown-100">
-                <i class="fa-solid fa-headset w-6 text-brown-400"></i> ติดต่อเรา
+            <button onclick="openLineContact()" class="text-left px-5 py-3.5 rounded-[1.5rem] hover:bg-white transition text-gray-700 font-medium shadow-sm border border-transparent hover:border-pastel-100">
+                <i class="fa-solid fa-headset w-6 text-pastel-400"></i> ติดต่อเรา
             </button>
 
             <button id="btn-logout" onclick="logout()" class="hidden text-left px-5 py-3.5 rounded-[1.5rem] hover:bg-red-50 text-red-500 transition font-medium">
@@ -261,76 +277,76 @@
     <main class="flex-grow max-w-6xl mx-auto w-full p-4 relative mb-10 mt-2">
         
         <div id="view-home" class="view-section">
-            <div class="w-full h-56 md:h-80 bg-white cute-card shadow-lg shadow-brown-100 relative mb-8 border-4 border-white overflow-hidden cursor-pointer" onclick="clickBanner()">
-                <img id="main-banner" src="https://via.placeholder.com/1200x400/F5EBE1/A67C52?text=Loading..." class="w-full h-full object-cover fade-transition hover:scale-105 transition duration-500" loading="lazy">
+            <div class="w-full h-56 md:h-80 bg-white cute-card shadow-lg shadow-pink-100 relative mb-8 border-4 border-white overflow-hidden cursor-pointer" onclick="clickBanner()">
+                <img id="main-banner" src="https://via.placeholder.com/1200x400/ffe4e1/ff69b4?text=Loading..." class="w-full h-full object-cover fade-transition hover:scale-105 transition duration-500" loading="lazy">
             </div>
             
             <div class="flex items-center justify-between mb-6 px-2">
-                <h2 id="home-product-title" class="text-2xl font-bold bg-gradient-to-r from-brown-500 to-brown-400 text-gradient">
-                    <i class="fa-solid fa-star text-yellow-500 mr-2"></i> สินค้าแนะนำ
+                <h2 id="home-product-title" class="text-2xl font-bold bg-gradient-to-r from-pastel-500 to-pastel-400 text-gradient">
+                    <i class="fa-solid fa-star text-yellow-400 mr-2"></i> สินค้าแนะนำ
                 </h2>
-                <span id="guest-badge" class="text-xs text-brown-500 bg-white px-4 py-1.5 rounded-full shadow-sm border border-brown-100 font-medium">
+                <span id="guest-badge" class="text-xs text-pastel-500 bg-white px-4 py-1.5 rounded-full shadow-sm border border-pink-100 font-medium">
                     <i class="fa-solid fa-lock mr-1"></i> ล็อกอินเพื่อดูทั้งหมด
                 </span>
             </div>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-5" id="product-container">
                 <div class="col-span-full text-center py-10 text-gray-400">
-                    <i class="fa-solid fa-spinner fa-spin text-4xl text-brown-400 mb-3"></i><br>กำลังจัดเรียงสินค้า...
+                    <i class="fa-solid fa-spinner fa-spin text-4xl text-pastel-400 mb-3"></i><br>กำลังจัดเรียงสินค้า...
                 </div>
             </div>
         </div>
 
         <div id="view-products" class="view-section hidden">
-            <h2 class="text-2xl font-bold bg-gradient-to-r from-brown-500 to-brown-400 text-gradient mb-6 px-2">
+            <h2 class="text-2xl font-bold bg-gradient-to-r from-pastel-500 to-pastel-400 text-gradient mb-6 px-2">
                 <i class="fa-solid fa-boxes-packing mr-2"></i> เลือกช้อปตามหมวดหมู่
             </h2>
             <div id="all-products-container" class="space-y-8"></div>
         </div>
 
         <div id="view-inbox" class="view-section hidden max-w-3xl mx-auto">
-            <h2 class="text-2xl font-bold bg-gradient-to-r from-brown-500 to-brown-400 text-gradient mb-6 px-2 text-center">
+            <h2 class="text-2xl font-bold bg-gradient-to-r from-pastel-500 to-pastel-400 text-gradient mb-6 px-2 text-center">
                 <i class="fa-solid fa-envelope-open-text mr-2"></i> กล่องข้อความ
             </h2>
             <div id="inbox-list" class="space-y-4"></div>
         </div>
 
         <div id="view-history" class="view-section hidden max-w-3xl mx-auto">
-            <h2 class="text-2xl font-bold bg-gradient-to-r from-brown-500 to-brown-400 text-gradient mb-6 px-2 text-center">
+            <h2 class="text-2xl font-bold bg-gradient-to-r from-pastel-500 to-pastel-400 text-gradient mb-6 px-2 text-center">
                 <i class="fa-solid fa-clock-rotate-left mr-2"></i> ประวัติการสั่งซื้อ
             </h2>
             <div id="history-list" class="space-y-4"></div>
         </div>
 
         <div id="view-sell" class="view-section hidden max-w-2xl mx-auto">
-            <h2 class="text-2xl font-bold bg-gradient-to-r from-brown-600 to-brown-400 text-gradient mb-6 text-center">
+            <h2 class="text-2xl font-bold bg-gradient-to-r from-pastel-600 to-pastel-400 text-gradient mb-6 text-center">
                 <i class="fa-solid fa-store mr-2"></i> ลงขายสินค้าของคุณ
             </h2>
             <div class="glass cute-card p-8">
                 <form onsubmit="handleUserAddProduct(event)" class="space-y-4">
                     
-                    <div class="text-sm font-bold text-brown-600 mb-2"><i class="fa-solid fa-tags mr-1"></i> หมวดหมู่สินค้า</div>
-                    <select id="user-cat" class="w-full p-3.5 rounded-[1.5rem] outline-none shadow-sm border-2 border-transparent focus:border-brown-300 text-gray-700" onchange="toggleUserProductForm()">
+                    <div class="text-sm font-bold text-pastel-600 mb-2"><i class="fa-solid fa-tags mr-1"></i> หมวดหมู่สินค้า</div>
+                    <select id="user-cat" class="w-full p-3.5 rounded-[1.5rem] outline-none shadow-sm border-2 border-transparent focus:border-pink-300 text-gray-700" onchange="toggleUserProductForm()">
                         <option value="แอพพรีเมียม">แอพพรีเมียม</option>
                         <option value="เติมเกม">เติมเกม</option>
                         <option value="สติ๊กเกอร์">สติ๊กเกอร์</option>
                         <option value="custom">อื่นๆ (เพิ่มหมวดหมู่เอง...)</option>
                     </select>
-                    <input type="text" id="user-cat-custom" placeholder="ระบุชื่อหมวดหมู่ที่ต้องการ" class="w-full p-3.5 rounded-[1.5rem] outline-none shadow-sm hidden border-2 border-brown-200 focus:border-brown-400 text-gray-700">
+                    <input type="text" id="user-cat-custom" placeholder="ระบุชื่อหมวดหมู่ที่ต้องการ" class="w-full p-3.5 rounded-[1.5rem] outline-none shadow-sm hidden border-2 border-pink-200 focus:border-pink-400 text-gray-700">
 
-                    <div class="text-sm font-bold text-brown-600 mb-2 mt-4"><i class="fa-solid fa-image mr-1"></i> ข้อมูลสินค้า</div>
-                    <input type="text" id="user-img" required placeholder="ลิงก์รูปภาพสินค้า (URL)" class="w-full p-3.5 rounded-[1.5rem] outline-none shadow-sm border-2 border-transparent focus:border-brown-300 text-gray-700">
-                    <input type="text" id="user-name" required placeholder="ชื่อสินค้า" class="w-full p-3.5 rounded-[1.5rem] outline-none shadow-sm border-2 border-transparent focus:border-brown-300 text-gray-700">
+                    <div class="text-sm font-bold text-pastel-600 mb-2 mt-4"><i class="fa-solid fa-image mr-1"></i> ข้อมูลสินค้า</div>
+                    <input type="text" id="user-img" required placeholder="ลิงก์รูปภาพสินค้า (URL)" class="w-full p-3.5 rounded-[1.5rem] outline-none shadow-sm border-2 border-transparent focus:border-pink-300 text-gray-700">
+                    <input type="text" id="user-name" required placeholder="ชื่อสินค้า" class="w-full p-3.5 rounded-[1.5rem] outline-none shadow-sm border-2 border-transparent focus:border-pink-300 text-gray-700">
                     
                     <div class="flex gap-3">
-                        <input type="number" id="user-price" step="0.01" min="0" required placeholder="ราคาปกติ (บาท)" class="w-1/2 p-3.5 rounded-[1.5rem] outline-none shadow-sm border-2 border-transparent focus:border-brown-300 text-gray-700">
-                        <input type="number" id="user-discount" step="0.01" min="0" placeholder="ส่วนลด (บาท) ใส่ 0 หากไม่มี" class="w-1/2 p-3.5 rounded-[1.5rem] outline-none shadow-sm border-2 border-transparent focus:border-brown-300 text-gray-700">
+                        <input type="number" id="user-price" step="0.01" min="0" required placeholder="ราคาปกติ (บาท)" class="w-1/2 p-3.5 rounded-[1.5rem] outline-none shadow-sm border-2 border-transparent focus:border-pink-300 text-gray-700">
+                        <input type="number" id="user-discount" step="0.01" min="0" placeholder="ส่วนลด (บาท) ใส่ 0 หากไม่มี" class="w-1/2 p-3.5 rounded-[1.5rem] outline-none shadow-sm border-2 border-transparent focus:border-pink-300 text-gray-700">
                     </div>
 
-                    <textarea id="user-detail" rows="2" placeholder="รายละเอียดสินค้า" class="w-full p-3.5 rounded-[1.5rem] outline-none shadow-sm border-2 border-transparent focus:border-brown-300 text-gray-700"></textarea>
-                    <textarea id="user-note" rows="2" placeholder="หมายเหตุเพิ่มเติม (ถ้ามี)" class="w-full p-3.5 rounded-[1.5rem] outline-none shadow-sm border-2 border-transparent focus:border-brown-300 text-gray-700 bg-red-50"></textarea>
+                    <textarea id="user-detail" rows="2" placeholder="รายละเอียดสินค้า" class="w-full p-3.5 rounded-[1.5rem] outline-none shadow-sm border-2 border-transparent focus:border-pink-300 text-gray-700"></textarea>
+                    <textarea id="user-note" rows="2" placeholder="หมายเหตุเพิ่มเติม (ถ้ามี)" class="w-full p-3.5 rounded-[1.5rem] outline-none shadow-sm border-2 border-transparent focus:border-pink-300 text-gray-700 bg-red-50"></textarea>
 
-                    <button type="submit" class="w-full bg-gradient-to-r from-brown-400 to-brown-500 text-white py-4 rounded-[1.5rem] font-bold text-lg mt-2 hover:shadow-lg hover:shadow-brown-200 transition">
+                    <button type="submit" class="w-full bg-gradient-to-r from-pastel-400 to-pastel-500 text-white py-4 rounded-[1.5rem] font-bold text-lg mt-2 hover:shadow-lg hover:shadow-pink-200 transition">
                         <i class="fa-solid fa-paper-plane mr-2"></i> โพสต์ขายสินค้า
                     </button>
                 </form>
@@ -338,11 +354,11 @@
         </div>
 
         <div id="view-admin" class="view-section hidden">
-            <h2 class="text-2xl font-bold bg-gradient-to-r from-brown-600 to-brown-400 text-gradient mb-6">
+            <h2 class="text-2xl font-bold bg-gradient-to-r from-pastel-600 to-pastel-400 text-gradient mb-6">
                 <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> จัดการระบบแอดมิน
             </h2>
             
-            <div class="flex flex-wrap gap-3 mb-6 bg-white/50 p-2 rounded-full border border-brown-100 w-fit">
+            <div class="flex flex-wrap gap-3 mb-6 bg-white/50 p-2 rounded-full border border-pink-100 w-fit">
                 <button onclick="switchAdminTab('setting')" id="tab-btn-setting" class="admin-tab-active px-6 py-2.5 rounded-full font-medium transition text-sm">
                     <i class="fa-solid fa-sliders mr-2"></i> ตั้งค่าเว็บ
                 </button>
@@ -354,36 +370,36 @@
             <div id="admin-tab-setting" class="admin-content glass cute-card p-8">
                 <form onsubmit="saveWebSettings(event)" class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     
-                    <div class="md:col-span-2 text-brown-600 font-bold border-b border-brown-200 pb-2 mt-2">
+                    <div class="md:col-span-2 text-pastel-600 font-bold border-b border-pink-200 pb-2 mt-2">
                         <i class="fa-solid fa-globe mr-2"></i> ข้อมูลเว็บไซต์
                     </div>
-                    <input type="text" id="cfg-name" placeholder="ชื่อร้าน" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-brown-800">
-                    <input type="text" id="cfg-logo" placeholder="URL โลโก้" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-brown-800">
-                    <input type="text" id="cfg-banner" placeholder="URL แบนเนอร์" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-brown-800">
-                    <input type="text" id="cfg-banner-link" placeholder="ลิงก์แบนเนอร์" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-brown-800">
+                    <input type="text" id="cfg-name" placeholder="ชื่อร้าน" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-gray-800">
+                    <input type="text" id="cfg-logo" placeholder="URL โลโก้" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-gray-800">
+                    <input type="text" id="cfg-banner" placeholder="URL แบนเนอร์" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-gray-800">
+                    <input type="text" id="cfg-banner-link" placeholder="ลิงก์แบนเนอร์" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-gray-800">
                     
-                    <div class="md:col-span-2 text-brown-600 font-bold border-b border-brown-200 pb-2 mt-4">
+                    <div class="md:col-span-2 text-pastel-600 font-bold border-b border-pink-200 pb-2 mt-4">
                         <i class="fa-solid fa-qrcode mr-2"></i> ตั้งค่าช่องทางรับเงิน
                     </div>
-                    <input type="text" id="cfg-qr" placeholder="URL รูป QR Code ธนาคาร" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-brown-800">
-                    <input type="text" id="cfg-qr-true" placeholder="URL รูป QR Code ทรูมันนี่วอลเล็ท" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-brown-800">
+                    <input type="text" id="cfg-qr" placeholder="URL รูป QR Code ธนาคาร" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-gray-800">
+                    <input type="text" id="cfg-qr-true" placeholder="URL รูป QR Code ทรูมันนี่วอลเล็ท" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-gray-800">
 
-                    <div class="md:col-span-2 text-brown-600 font-bold border-b border-brown-200 pb-2 mt-4">
+                    <div class="md:col-span-2 text-pastel-600 font-bold border-b border-pink-200 pb-2 mt-4">
                         <i class="fa-solid fa-bullhorn mr-2"></i> ประกาศหน้าเว็บไซต์
                     </div>
-                    <textarea id="cfg-announce" placeholder="ข้อความประกาศ (จะเด้ง Pop-up หน้าเว็บเมื่อมีประกาศใหม่)" rows="2" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none md:col-span-2 text-brown-800"></textarea>
+                    <textarea id="cfg-announce" placeholder="ข้อความประกาศ (จะเด้ง Pop-up หน้าเว็บเมื่อมีประกาศใหม่)" rows="2" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none md:col-span-2 text-gray-800"></textarea>
 
-                    <div class="md:col-span-2 text-brown-600 font-bold border-b border-brown-200 pb-2 mt-4">
+                    <div class="md:col-span-2 text-pastel-600 font-bold border-b border-pink-200 pb-2 mt-4">
                         <i class="fa-solid fa-address-book mr-2"></i> ติดต่อ & อีเมลรับแจ้งเตือน
                     </div>
-                    <input type="text" id="cfg-admin-mail" placeholder="อีเมลแอดมิน (รับแจ้งเตือนออเดอร์)" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none md:col-span-2 text-brown-800">
-                    <input type="text" id="cfg-fb" placeholder="ลิงก์ Facebook" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-brown-800">
-                    <input type="text" id="cfg-line" placeholder="ลิงก์ LINE" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-brown-800">
-                    <input type="text" id="cfg-page" placeholder="ลิงก์ Page" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-brown-800">
-                    <input type="text" id="cfg-mail" placeholder="ลิงก์ Email ติดต่อ" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-brown-800">
+                    <input type="text" id="cfg-admin-mail" placeholder="อีเมลแอดมิน (รับแจ้งเตือนออเดอร์)" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none md:col-span-2 text-gray-800">
+                    <input type="text" id="cfg-fb" placeholder="ลิงก์ Facebook" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-gray-800">
+                    <input type="text" id="cfg-line" placeholder="ลิงก์ LINE" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-gray-800">
+                    <input type="text" id="cfg-page" placeholder="ลิงก์ Page" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-gray-800">
+                    <input type="text" id="cfg-mail" placeholder="ลิงก์ Email ติดต่อ" class="w-full p-3.5 rounded-[1.5rem] border-2 border-white bg-white/60 focus:bg-white outline-none text-gray-800">
                     
                     <div class="md:col-span-2 mt-2">
-                        <button type="submit" class="w-full bg-gradient-to-r from-brown-400 to-brown-500 text-white py-4 rounded-[1.5rem] transition font-bold text-lg hover:shadow-lg hover:shadow-brown-200">
+                        <button type="submit" class="w-full bg-gradient-to-r from-pastel-400 to-pastel-500 text-white py-4 rounded-[1.5rem] transition font-bold text-lg hover:shadow-lg hover:shadow-pink-200">
                             <i class="fa-solid fa-save mr-2"></i> บันทึกการตั้งค่าทั้งหมด
                         </button>
                     </div>
@@ -394,27 +410,27 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     
                     <div id="admin-add-section" class="bg-white/60 p-5 rounded-[2rem] border-2 border-white h-fit">
-                        <h3 class="font-bold text-brown-600 mb-4">
+                        <h3 class="font-bold text-pastel-600 mb-4">
                             <i class="fa-solid fa-plus-circle mr-2"></i> แอดมินลงสินค้า
                         </h3>
                         <form onsubmit="saveManualProduct(event)" class="space-y-4">
                             
-                            <select id="man-cat" class="w-full p-3 rounded-[1rem] outline-none shadow-sm border border-brown-100 text-gray-700 font-medium" onchange="toggleAdminProductForm()">
+                            <select id="man-cat" class="w-full p-3 rounded-[1rem] outline-none shadow-sm border border-pink-100 text-gray-700 font-medium" onchange="toggleAdminProductForm()">
                                 <option value="แอพพรีเมียม">แอพพรีเมียม (รหัสออโต้)</option>
                                 <option value="custom">เพิ่มหมวดหมู่เอง... (สินค้าออเดอร์)</option>
                             </select>
                             
-                            <input type="text" id="man-cat-custom" placeholder="ระบุหมวดหมู่ เช่น งานออกแบบ, สติ๊กเกอร์, เกม" class="w-full p-3 rounded-[1rem] outline-none shadow-sm hidden border border-brown-200 focus:border-brown-400 text-gray-700">
+                            <input type="text" id="man-cat-custom" placeholder="ระบุหมวดหมู่ เช่น งานออกแบบ, สติ๊กเกอร์, เกม" class="w-full p-3 rounded-[1rem] outline-none shadow-sm hidden border border-pink-200 focus:border-pink-400 text-gray-700">
 
-                            <input type="text" id="man-name" required placeholder="ชื่อสินค้า" class="w-full p-3 rounded-[1rem] outline-none shadow-sm border border-brown-100 text-gray-700">
-                            <input type="number" id="man-price" step="0.01" min="0" required placeholder="ราคาขาย (บาท)" class="w-full p-3 rounded-[1rem] outline-none shadow-sm border border-brown-100 text-gray-700">
-                            <input type="text" id="man-img" required placeholder="URL รูปสินค้า" class="w-full p-3 rounded-[1rem] outline-none shadow-sm border border-brown-100 text-gray-700">
+                            <input type="text" id="man-name" required placeholder="ชื่อสินค้า" class="w-full p-3 rounded-[1rem] outline-none shadow-sm border border-pink-100 text-gray-700">
+                            <input type="number" id="man-price" step="0.01" min="0" required placeholder="ราคาขาย (บาท)" class="w-full p-3 rounded-[1rem] outline-none shadow-sm border border-pink-100 text-gray-700">
+                            <input type="text" id="man-img" required placeholder="URL รูปสินค้า" class="w-full p-3 rounded-[1rem] outline-none shadow-sm border border-pink-100 text-gray-700">
                             
-                            <textarea id="man-detail" rows="2" placeholder="รายละเอียดสินค้า" class="w-full p-3 rounded-[1rem] outline-none shadow-sm border border-brown-100 text-gray-700"></textarea>
+                            <textarea id="man-detail" rows="2" placeholder="รายละเอียดสินค้า" class="w-full p-3 rounded-[1rem] outline-none shadow-sm border border-pink-100 text-gray-700"></textarea>
                             
-                            <textarea id="man-stock" rows="3" placeholder="สต๊อก (1 รหัสต่อ 1 บรรทัด)" class="w-full p-3 rounded-[1rem] outline-none shadow-sm border border-brown-100 text-gray-700"></textarea>
+                            <textarea id="man-stock" rows="3" placeholder="สต๊อก (1 รหัสต่อ 1 บรรทัด)" class="w-full p-3 rounded-[1rem] outline-none shadow-sm border border-pink-100 text-gray-700"></textarea>
                             
-                            <button type="submit" class="w-full bg-brown-400 text-white py-3 rounded-[1rem] font-bold hover:bg-brown-500 transition shadow">
+                            <button type="submit" class="w-full bg-pastel-400 text-white py-3 rounded-[1rem] font-bold hover:bg-pastel-500 transition shadow">
                                 <i class="fa-solid fa-plus mr-1"></i> เพิ่มสินค้าเข้าระบบ
                             </button>
                         </form>
@@ -422,7 +438,7 @@
                     
                     <div class="bg-white/60 p-5 rounded-[2rem] border-2 border-white">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-brown-600">
+                            <h3 class="font-bold text-pastel-600">
                                 <i class="fa-solid fa-boxes-stacked mr-2"></i> สินค้าในร้าน
                             </h3>
                         </div>
@@ -435,25 +451,25 @@
 
         <div id="view-topup" class="view-section hidden max-w-md mx-auto">
             <div class="glass cute-card p-8 text-center">
-                <div class="w-16 h-16 bg-brown-100 rounded-full flex items-center justify-center mx-auto mb-4 text-brown-500 text-3xl shadow-inner">
+                <div class="w-16 h-16 bg-pastel-100 rounded-full flex items-center justify-center mx-auto mb-4 text-pastel-500 text-3xl shadow-inner">
                     <i class="fa-solid fa-wallet"></i>
                 </div>
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">เติมเครดิต</h2>
                 
-                <div class="flex justify-center gap-2 mb-4 bg-white p-1.5 rounded-full shadow-sm border border-brown-100">
-                    <button type="button" onclick="switchQR('bank')" id="btn-qr-bank" class="flex-1 py-2 rounded-full text-sm font-bold bg-brown-500 text-white shadow transition">ธนาคาร</button>
-                    <button type="button" onclick="switchQR('true')" id="btn-qr-true" class="flex-1 py-2 rounded-full text-sm font-bold text-gray-500 hover:bg-brown-100 transition">ทรูมันนี่</button>
+                <div class="flex justify-center gap-2 mb-4 bg-white p-1.5 rounded-full shadow-sm border border-pink-100">
+                    <button type="button" onclick="switchQR('bank')" id="btn-qr-bank" class="flex-1 py-2 rounded-full text-sm font-bold bg-pastel-500 text-white shadow transition">ธนาคาร</button>
+                    <button type="button" onclick="switchQR('true')" id="btn-qr-true" class="flex-1 py-2 rounded-full text-sm font-bold text-gray-500 hover:bg-pastel-100 transition">ทรูมันนี่</button>
                 </div>
 
-                <div class="p-2 bg-white rounded-[2rem] inline-block mb-6 shadow-sm border-2 border-brown-50">
+                <div class="p-2 bg-white rounded-[2rem] inline-block mb-6 shadow-sm border-2 border-pink-50">
                     <img id="display-qr" src="https://via.placeholder.com/250?text=Scan+QR" class="w-48 h-48 rounded-[1.5rem] object-cover" loading="lazy">
                 </div>
                 
                 <form onsubmit="handleTopup(event)" class="text-left space-y-4">
-                    <input type="number" id="topup-amount" step="0.01" min="1" required placeholder="จำนวนเงิน (บาท) ใส่ทศนิยมได้" class="w-full p-3.5 rounded-[1.5rem] border-2 border-transparent bg-white focus:border-brown-300 outline-none shadow-sm text-gray-700">
-                    <input type="text" id="topup-last6" pattern="^[A-Za-z0-9]{6}$" maxlength="6" required placeholder="เลขท้ายสลิป 6 ตัว" class="w-full p-3.5 rounded-[1.5rem] border-2 border-transparent bg-white focus:border-brown-300 outline-none shadow-sm uppercase text-gray-700">
-                    <input type="file" id="topup-slip" accept="image/*" required class="w-full text-sm bg-white rounded-[1.5rem] p-1.5 shadow-sm file:mr-4 file:py-2.5 file:px-5 file:rounded-full file:border-0 file:bg-brown-50 file:text-brown-600 file:font-bold cursor-pointer">
-                    <button type="submit" class="w-full bg-gradient-to-r from-brown-400 to-brown-500 text-white py-4 rounded-[1.5rem] font-bold text-lg mt-2 hover:shadow-lg shadow-brown-200 transition">
+                    <input type="number" id="topup-amount" step="0.01" min="1" required placeholder="จำนวนเงิน (บาท) ใส่ทศนิยมได้" class="w-full p-3.5 rounded-[1.5rem] border-2 border-transparent bg-white focus:border-pink-300 outline-none shadow-sm text-gray-700">
+                    <input type="text" id="topup-last6" pattern="^[A-Za-z0-9]{6}$" maxlength="6" required placeholder="เลขท้ายสลิป 6 ตัว" class="w-full p-3.5 rounded-[1.5rem] border-2 border-transparent bg-white focus:border-pink-300 outline-none shadow-sm uppercase text-gray-700">
+                    <input type="file" id="topup-slip" accept="image/*" required class="w-full text-sm bg-white rounded-[1.5rem] p-1.5 shadow-sm file:mr-4 file:py-2.5 file:px-5 file:rounded-full file:border-0 file:bg-pink-50 file:text-pastel-600 file:font-bold cursor-pointer">
+                    <button type="submit" class="w-full bg-gradient-to-r from-pastel-400 to-pastel-500 text-white py-4 rounded-[1.5rem] font-bold text-lg mt-2 hover:shadow-lg shadow-pink-200 transition">
                         <i class="fa-solid fa-paper-plane mr-2"></i> แจ้งโอนเงิน
                     </button>
                 </form>
@@ -462,13 +478,13 @@
 
     </main>
 
-    <footer class="bg-white border-t border-brown-200 py-8 mt-auto">
+    <footer class="bg-white border-t border-pink-200 py-8 mt-auto">
         <div class="max-w-6xl mx-auto px-4 text-center">
-            <div id="footer-social" class="flex justify-center gap-6 mb-4 text-2xl text-brown-400">
-                <a href="#" id="link-fb" target="_blank" class="hover:text-brown-600 transition hidden"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#" id="link-line" target="_blank" class="hover:text-brown-600 transition hidden"><i class="fa-brands fa-line"></i></a>
-                <a href="#" id="link-page" target="_blank" class="hover:text-brown-600 transition hidden"><i class="fa-solid fa-shop"></i></a>
-                <a href="#" id="link-mail" target="_blank" class="hover:text-brown-600 transition hidden"><i class="fa-solid fa-envelope"></i></a>
+            <div id="footer-social" class="flex justify-center gap-6 mb-4 text-2xl text-pastel-400">
+                <a href="#" id="link-fb" target="_blank" class="hover:text-pastel-600 transition hidden"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" id="link-line" target="_blank" class="hover:text-pastel-600 transition hidden"><i class="fa-brands fa-line"></i></a>
+                <a href="#" id="link-page" target="_blank" class="hover:text-pastel-600 transition hidden"><i class="fa-solid fa-shop"></i></a>
+                <a href="#" id="link-mail" target="_blank" class="hover:text-pastel-600 transition hidden"><i class="fa-solid fa-envelope"></i></a>
             </div>
             <p class="text-sm text-gray-400 font-medium tracking-wide">
                 &copy; <span id="copy-year">2026</span> <span id="footer-name">beamstore</span>. All Rights Reserved. 
@@ -478,31 +494,31 @@
 
     <div id="login-modal" class="fixed inset-0 bg-black/30 z-50 hidden flex items-center justify-center backdrop-blur-sm transition-opacity">
         <div class="bg-white/90 backdrop-blur-md p-8 rounded-[2.5rem] shadow-2xl w-full max-w-sm m-4 relative border-4 border-white">
-            <button onclick="closeModal('login-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-brown-500 bg-gray-50 rounded-full w-8 h-8 flex items-center justify-center transition">
+            <button onclick="closeModal('login-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-pastel-500 bg-gray-50 rounded-full w-8 h-8 flex items-center justify-center transition">
                 <i class="fa-solid fa-times"></i>
             </button>
             <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">เข้าสู่ระบบ</h2>
             <form onsubmit="handleLogin(event)" class="space-y-4">
-                <input type="text" id="login-id" required placeholder="ชื่อผู้ใช้ หรือ อีเมล" class="w-full px-5 py-4 rounded-[1.5rem] bg-gray-50 outline-none border-2 border-transparent focus:bg-white focus:border-brown-300 transition text-gray-700">
-                <input type="password" id="login-pass" required placeholder="รหัสผ่าน" class="w-full px-5 py-4 rounded-[1.5rem] bg-gray-50 outline-none border-2 border-transparent focus:bg-white focus:border-brown-300 transition text-gray-700">
-                <button type="submit" class="w-full bg-gradient-to-r from-brown-400 to-brown-500 text-white py-4 rounded-[1.5rem] font-bold hover:opacity-90 transition shadow-lg shadow-brown-200">เข้าสู่ระบบ</button>
+                <input type="text" id="login-id" required placeholder="ชื่อผู้ใช้ หรือ อีเมล" class="w-full px-5 py-4 rounded-[1.5rem] bg-gray-50 outline-none border-2 border-transparent focus:bg-white focus:border-pink-300 transition text-gray-700">
+                <input type="password" id="login-pass" required placeholder="รหัสผ่าน" class="w-full px-5 py-4 rounded-[1.5rem] bg-gray-50 outline-none border-2 border-transparent focus:bg-white focus:border-pink-300 transition text-gray-700">
+                <button type="submit" class="w-full bg-gradient-to-r from-pastel-400 to-pastel-500 text-white py-4 rounded-[1.5rem] font-bold hover:opacity-90 transition shadow-lg shadow-pink-200">เข้าสู่ระบบ</button>
             </form>
-            <p class="text-center mt-5 text-sm text-gray-500">ยังไม่มีบัญชี? <span onclick="closeModal('login-modal'); openModal('register-modal')" class="text-brown-500 cursor-pointer font-bold hover:underline">สมัครเลย</span></p>
+            <p class="text-center mt-5 text-sm text-gray-500">ยังไม่มีบัญชี? <span onclick="closeModal('login-modal'); openModal('register-modal')" class="text-pastel-500 cursor-pointer font-bold hover:underline">สมัครเลย</span></p>
         </div>
     </div>
     
     <div id="register-modal" class="fixed inset-0 bg-black/30 z-50 hidden flex items-center justify-center backdrop-blur-sm transition-opacity">
         <div class="bg-white/90 backdrop-blur-md p-8 rounded-[2.5rem] shadow-2xl w-full max-w-sm m-4 relative border-4 border-white">
-            <button onclick="closeModal('register-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-brown-500 bg-gray-50 rounded-full w-8 h-8 flex items-center justify-center transition">
+            <button onclick="closeModal('register-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-pastel-500 bg-gray-50 rounded-full w-8 h-8 flex items-center justify-center transition">
                 <i class="fa-solid fa-times"></i>
             </button>
-            <h2 class="text-2xl font-bold text-center mb-6 text-brown-500">สมัครสมาชิก</h2>
+            <h2 class="text-2xl font-bold text-center mb-6 text-pastel-500">สมัครสมาชิก</h2>
             <form onsubmit="handleRegister(event)" class="space-y-4">
-                <input type="text" id="reg-id" required placeholder="UserID" class="w-full px-5 py-3 rounded-[1.5rem] bg-gray-50 outline-none border-2 border-transparent focus:bg-white focus:border-brown-300 transition text-gray-700">
-                <input type="email" id="reg-email" required placeholder="Email" class="w-full px-5 py-3 rounded-[1.5rem] bg-gray-50 outline-none border-2 border-transparent focus:bg-white focus:border-brown-300 transition text-gray-700">
-                <input type="password" id="reg-pass" required placeholder="รหัสผ่าน" class="w-full px-5 py-3 rounded-[1.5rem] bg-gray-50 outline-none border-2 border-transparent focus:bg-white focus:border-brown-300 transition text-gray-700">
-                <input type="password" id="reg-confirm" required placeholder="ยืนยันรหัสผ่าน" class="w-full px-5 py-3 rounded-[1.5rem] bg-gray-50 outline-none border-2 border-transparent focus:bg-white focus:border-brown-300 transition text-gray-700">
-                <button type="submit" class="w-full bg-gradient-to-r from-brown-400 to-brown-500 text-white py-4 rounded-[1.5rem] font-bold hover:opacity-90 transition shadow-lg shadow-brown-200">สมัครสมาชิก</button>
+                <input type="text" id="reg-id" required placeholder="UserID" class="w-full px-5 py-3 rounded-[1.5rem] bg-gray-50 outline-none border-2 border-transparent focus:bg-white focus:border-pink-300 transition text-gray-700">
+                <input type="email" id="reg-email" required placeholder="Email" class="w-full px-5 py-3 rounded-[1.5rem] bg-gray-50 outline-none border-2 border-transparent focus:bg-white focus:border-pink-300 transition text-gray-700">
+                <input type="password" id="reg-pass" required placeholder="รหัสผ่าน" class="w-full px-5 py-3 rounded-[1.5rem] bg-gray-50 outline-none border-2 border-transparent focus:bg-white focus:border-pink-300 transition text-gray-700">
+                <input type="password" id="reg-confirm" required placeholder="ยืนยันรหัสผ่าน" class="w-full px-5 py-3 rounded-[1.5rem] bg-gray-50 outline-none border-2 border-transparent focus:bg-white focus:border-pink-300 transition text-gray-700">
+                <button type="submit" class="w-full bg-gradient-to-r from-pastel-400 to-pastel-500 text-white py-4 rounded-[1.5rem] font-bold hover:opacity-90 transition shadow-lg shadow-pink-200">สมัครสมาชิก</button>
             </form>
         </div>
     </div>
@@ -615,7 +631,7 @@
                 const mq = document.getElementById('marquee-text');
                 
                 if (res && res.status === 'success' && res.data.length > 0) {
-                    let text = res.data.map(item => `<i class="fa-solid fa-basket-shopping text-brown-400 mr-1"></i> ลูกค้า ${item.user} สั่งซื้อ ${item.product} (${timeAgo(item.time)})`).join(" &nbsp;&nbsp;|&nbsp;&nbsp; ");
+                    let text = res.data.map(item => `<i class="fa-solid fa-basket-shopping text-pink-400 mr-1"></i> ลค. ${item.user} สั่งซื้อ ${item.product} (${timeAgo(item.time)})`).join(" &nbsp;&nbsp;|&nbsp;&nbsp; ");
                     if (mq) mq.innerHTML = text;
                 } else {
                     if (mq) mq.innerText = "ยินดีต้อนรับสู่ร้านค้าของเรา! แหล่งรวมสินค้าราคาถูก";
@@ -629,17 +645,17 @@
         // 3. จัดการ UI สลับหน้าไปมา
         // ----------------------------------------------------
         function toggleMenu() { 
-            const sb = document.getElementById('sidebar');
-            const bd = document.getElementById('sidebar-backdrop');
-            if (sb) sb.classList.toggle('translate-x-full'); 
-            if (bd) bd.classList.toggle('hidden'); 
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            if (sidebar) sidebar.classList.toggle('translate-x-full'); 
+            if (backdrop) backdrop.classList.toggle('hidden'); 
         }
         
         function closeMenu() { 
-            const sb = document.getElementById('sidebar');
-            const bd = document.getElementById('sidebar-backdrop');
-            if (sb) sb.classList.add('translate-x-full'); 
-            if (bd) bd.classList.add('hidden'); 
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            if (sidebar) sidebar.classList.add('translate-x-full'); 
+            if (backdrop) backdrop.classList.add('hidden'); 
         }
         
         function showView(id) { 
@@ -683,7 +699,7 @@
 
         function openLineContact() { 
             closeMenu(); 
-            const link = appSettings['cfg-fb'] || appSettings['cfg-line']; 
+            const link = appSettings['cfg-line'] || appSettings['cfg-page'] || appSettings['cfg-fb']; 
             if(link) { 
                 window.open(link, '_blank'); 
             } else { 
@@ -703,9 +719,9 @@
                 title: 'สงวนสิทธิ์สมาชิก', 
                 text: 'กรุณาเข้าสู่ระบบก่อนทำรายการนะคะ', 
                 icon: 'lock', 
-                iconColor: '#A67C52', 
+                iconColor: '#ff69b4', 
                 confirmButtonText: 'ล็อกอิน', 
-                confirmButtonColor: '#A67C52', 
+                confirmButtonColor: '#ff69b4', 
                 showCancelButton: true 
             }).then((res) => { 
                 if(res.isConfirmed) {
@@ -789,8 +805,8 @@
             
             if(!btnBank || !btnTrue || !imgQr) return;
 
-            const activeClass = 'flex-1 py-2 rounded-full text-sm font-bold bg-brown-500 text-white shadow transition';
-            const inactiveClass = 'flex-1 py-2 rounded-full text-sm font-bold text-gray-500 hover:bg-brown-100 transition';
+            const activeClass = 'flex-1 py-2 rounded-full text-sm font-bold bg-pastel-500 text-white shadow transition';
+            const inactiveClass = 'flex-1 py-2 rounded-full text-sm font-bold text-gray-500 hover:bg-pastel-100 transition';
 
             if (type === 'bank') {
                 btnBank.className = activeClass; 
@@ -886,10 +902,10 @@
                     if(sessionStorage.getItem('last_announce') !== currentAnnounce) {
                         setTimeout(() => { 
                             Swal.fire({ 
-                                title: '<i class="fa-solid fa-bullhorn mb-2 text-3xl text-brown-600"></i><br>ประกาศจากทางร้าน', 
+                                title: '<i class="fa-solid fa-bullhorn mb-2 text-3xl text-pastel-600"></i><br>ประกาศจากทางร้าน', 
                                 text: currentAnnounce, 
                                 confirmButtonText: 'รับทราบ', 
-                                confirmButtonColor: '#A67C52', 
+                                confirmButtonColor: '#ff69b4', 
                                 customClass: { popup: 'rounded-[2rem]' } 
                             }); 
                             sessionStorage.setItem('last_announce', currentAnnounce); 
@@ -903,7 +919,7 @@
                             imageUrl: appSettings['cfg-pop-img'], 
                             imageHeight: 200, 
                             confirmButtonText: 'รับทราบ', 
-                            confirmButtonColor: '#A67C52', 
+                            confirmButtonColor: '#ff69b4', 
                             customClass: { popup: 'rounded-[2rem]' } 
                         }); 
                         sessionStorage.setItem('popShown', 'true'); 
@@ -959,7 +975,7 @@
                 if(cat === 'custom') {
                     cat = getVal('user-cat-custom');
                     if(!cat) {
-                        return Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: 'กรุณาระบุชื่อหมวดหมู่ด้วยครับ', icon: 'warning', confirmButtonColor: '#A67C52' });
+                        return Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: 'กรุณาระบุชื่อหมวดหมู่ด้วยค่ะ', icon: 'warning', confirmButtonColor: '#ff69b4' });
                     }
                 }
                 
@@ -977,17 +993,17 @@
                 const res = await fetchGAS({ action: 'userAddProduct', product: p }); 
                 
                 if(res && res.status === 'success') { 
-                    Swal.fire({ title: 'สำเร็จ', text: res.message, icon: 'success', confirmButtonColor: '#A67C52' }); 
+                    Swal.fire({ title: 'สำเร็จ', text: res.message, icon: 'success', confirmButtonColor: '#ff69b4' }); 
                     if(e.target) e.target.reset(); 
                     fetchAndRenderProducts(); 
                     loadStats(); 
                     toggleUserProductForm(); 
                     navigate('home');
                 } else { 
-                    Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: res ? res.message : 'เพิ่มสินค้าไม่สำเร็จ', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                    Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: res ? res.message : 'เพิ่มสินค้าไม่สำเร็จ', icon: 'error', confirmButtonColor: '#ff69b4' }); 
                 }
             } catch (error) { 
-                Swal.fire({ title: 'ข้อผิดพลาด!', text: 'ระบบขัดข้อง', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                Swal.fire({ title: 'ข้อผิดพลาด!', text: 'ระบบขัดข้อง', icon: 'error', confirmButtonColor: '#ff69b4' }); 
             }
         }
 
@@ -998,14 +1014,14 @@
             const p = appProducts.find(x => x.id === id);
             if(!p) return;
             
-            let stockText = 'พร้อมส่ง (สินค้าออเดอร์)';
+            let stockText = 'พร้อมส่ง (สินค้าส่งให้แอดมินทำรายการ)';
             if(p.category === 'แอพพรีเมียม') {
                 stockText = p.stock > 0 ? `ว่าง: ${p.stock}` : 'สินค้าหมด';
             }
             
             let finalPrice = parseFloat(p.price) || 0;
             let discountAmt = parseFloat(p.discount) || 0;
-            let priceDisp = `<span class="text-brown-600 font-extrabold text-xl">${finalPrice.toFixed(2)} ฿</span>`;
+            let priceDisp = `<span class="text-pastel-600 font-extrabold text-xl">${finalPrice.toFixed(2)} ฿</span>`;
             
             if(discountAmt > 0) {
                 finalPrice = finalPrice - discountAmt;
@@ -1013,7 +1029,7 @@
                 priceDisp = `<div class="flex items-end gap-2"><span class="text-gray-400 line-through text-sm">${parseFloat(p.price).toFixed(2)} ฿</span><span class="text-red-500 font-extrabold text-xl">${finalPrice.toFixed(2)} ฿</span></div>`;
             }
             
-            let noteHTML = p.note ? `<div class="mt-3 bg-orange-50 p-3 rounded-xl border border-orange-200"><h5 class="text-orange-500 font-bold text-xs mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> หมายเหตุจากผู้ขาย</h5><p class="text-xs text-orange-400 whitespace-pre-line">${p.note}</p></div>` : '';
+            let noteHTML = p.note ? `<div class="mt-3 bg-red-50 p-3 rounded-xl border border-red-200"><h5 class="text-red-500 font-bold text-xs mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> หมายเหตุจากผู้ขาย</h5><p class="text-xs text-red-400 whitespace-pre-line">${p.note}</p></div>` : '';
 
             Swal.fire({
                 html: `
@@ -1022,12 +1038,12 @@
                         <h2 class="text-xl font-bold text-gray-800 mb-2">${p.name}</h2>
                         <div class="flex items-center justify-between gap-2 mb-4">
                             ${priceDisp}
-                            <span class="bg-brown-50 text-brown-600 text-xs px-2 py-1 rounded-full font-bold border border-brown-100">
+                            <span class="bg-pink-50 text-pink-500 text-xs px-2 py-1 rounded-full font-bold border border-pink-100">
                                 <i class="fa-solid fa-box mr-1"></i> ${stockText}
                             </span>
                         </div>
-                        <div class="bg-white/60 p-4 rounded-[1.5rem] border border-brown-50 shadow-inner">
-                            <h4 class="font-bold text-brown-600 mb-1">
+                        <div class="bg-white/60 p-4 rounded-[1.5rem] border border-pink-50 shadow-inner">
+                            <h4 class="font-bold text-pastel-600 mb-1">
                                 <i class="fa-solid fa-circle-info mr-1"></i> รายละเอียดสินค้า
                             </h4>
                             <p class="text-sm text-gray-600 whitespace-pre-line">${p.details || 'ไม่มีรายละเอียด'}</p>
@@ -1038,7 +1054,7 @@
                 showCloseButton: true, 
                 showCancelButton: true, 
                 confirmButtonText: '<i class="fa-solid fa-cart-shopping ml-1"></i> สั่งซื้อ', 
-                confirmButtonColor: '#A67C52', 
+                confirmButtonColor: '#ff69b4', 
                 cancelButtonText: 'ปิด', 
                 cancelButtonColor: '#d1d5db', 
                 customClass: { popup: 'rounded-[2rem]' }
@@ -1046,7 +1062,7 @@
                 if (result.isConfirmed) {
                     if (currentUser) { 
                         if (p.category === 'แอพพรีเมียม' && p.stock <= 0) { 
-                            Swal.fire({ title: 'ขออภัยค่ะ', text: 'สินค้านี้หมดชั่วคราว', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                            Swal.fire({ title: 'ขออภัยค่ะ', text: 'สินค้านี้หมดชั่วคราว', icon: 'error', confirmButtonColor: '#ff69b4' }); 
                         } else { 
                             processBuyFlow(p, finalPrice); 
                         } 
@@ -1067,17 +1083,17 @@
                     title: 'ระบุข้อมูลสั่งซื้อ',
                     html: `
                         <p class="text-sm text-gray-500 mb-3 text-left">
-                            หมวดหมู่: <b class="text-brown-600">${p.category}</b><br>
-                            กรุณาระบุข้อมูลสำหรับจัดส่ง (เช่น UID, ลิงก์รูป, ไอดีไลน์)
+                            หมวดหมู่: <b class="text-pastel-600">${p.category}</b><br>
+                            กรุณาระบุข้อมูลที่จำเป็น (เช่น UID เกม, ลิงก์, หรือไอดีไลน์)
                         </p>
-                        <textarea id="custom-data-input" class="w-full p-3.5 rounded-2xl border-2 border-brown-200 outline-none focus:border-brown-400 transition text-sm text-gray-700 bg-white shadow-sm box-border" rows="4" placeholder="พิมพ์ข้อมูลของคุณที่นี่..."></textarea>
+                        <textarea id="custom-data-input" class="w-full p-3.5 rounded-2xl border-2 border-pink-200 outline-none focus:border-pink-400 transition text-sm text-gray-700 bg-white shadow-sm box-border" rows="4" placeholder="พิมพ์ข้อมูลของคุณที่นี่..."></textarea>
                     `,
                     focusConfirm: false, 
                     showCloseButton: true, 
                     showCancelButton: true, 
                     cancelButtonText: 'ยกเลิก', 
                     cancelButtonColor: '#d1d5db', 
-                    confirmButtonColor: '#A67C52', 
+                    confirmButtonColor: '#ff69b4', 
                     confirmButtonText: 'ถัดไป <i class="fa-solid fa-arrow-right ml-1"></i>', 
                     customClass: { popup: 'rounded-[2rem]' },
                     preConfirm: () => { 
@@ -1106,7 +1122,7 @@
                 showCancelButton: true, 
                 cancelButtonText: 'ยกเลิก', 
                 confirmButtonText: '<i class="fa-solid fa-check ml-1"></i> ชำระเงิน', 
-                confirmButtonColor: '#A67C52', 
+                confirmButtonColor: '#ff69b4', 
                 cancelButtonColor: '#d1d5db', 
                 customClass: { popup: 'rounded-[2rem]' }
             }); 
@@ -1133,15 +1149,15 @@
                         loadStats();
 
                         if(p.category !== 'แอพพรีเมียม') {
-                            Swal.fire({ title: 'สำเร็จ! 🎉', text: 'แอดมินได้รับออเดอร์แล้ว กรุณารอจัดส่งภายใน 5-10 นาทีค่ะ', icon: 'success', confirmButtonColor: '#A67C52' });
+                            Swal.fire({ title: 'สำเร็จ! 🎉', text: 'แอดมินได้รับออเดอร์แล้ว กรุณารอจัดส่งภายใน 5-10 นาทีค่ะ', icon: 'success', confirmButtonColor: '#ff69b4' });
                         } else {
-                            Swal.fire({ title: 'สำเร็จ! 🎉', text: res.message, icon: 'success', confirmButtonColor: '#A67C52' }); 
+                            Swal.fire({ title: 'สำเร็จ! 🎉', text: res.message, icon: 'success', confirmButtonColor: '#ff69b4' }); 
                         }
                     } else { 
-                        Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: res ? res.message : 'เชื่อมต่อขัดข้อง', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                        Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: res ? res.message : 'เชื่อมต่อขัดข้อง', icon: 'error', confirmButtonColor: '#ff69b4' }); 
                     }
                 } catch (e) {
-                    Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: 'ระบบขัดข้อง กรุณาลองใหม่', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                    Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: 'ระบบขัดข้อง กรุณาลองใหม่', icon: 'error', confirmButtonColor: '#ff69b4' }); 
                 }
             }
         }
@@ -1155,7 +1171,7 @@
             
             let finalPrice = parseFloat(p.price) || 0;
             let discountAmt = parseFloat(p.discount) || 0;
-            let priceHTML = `<span class="text-brown-600 font-extrabold text-lg">${finalPrice.toFixed(2)} ฿</span>`;
+            let priceHTML = `<span class="text-pastel-600 font-extrabold text-lg">${finalPrice.toFixed(2)} ฿</span>`;
             
             if (discountAmt > 0) {
                 finalPrice = finalPrice - discountAmt;
@@ -1175,7 +1191,7 @@
                     stockBadge = `<span class="bg-red-50 text-red-500 text-[10px] px-2 py-0.5 rounded-full font-bold border border-red-200">สินค้าหมด</span>`;
                 }
             } else {
-                stockBadge = `<span class="bg-brown-50 text-brown-600 text-[10px] px-2 py-0.5 rounded-full font-bold border border-brown-200"><i class="fa-solid fa-truck-fast"></i> พรีออเดอร์</span>`;
+                stockBadge = `<span class="bg-pastel-50 text-pastel-600 text-[10px] px-2 py-0.5 rounded-full font-bold border border-pink-200"><i class="fa-solid fa-truck-fast"></i> พรีออเดอร์</span>`;
             }
 
             if(!currentUser) {
@@ -1183,11 +1199,11 @@
             } else if (p.category === 'แอพพรีเมียม' && p.stock <= 0) {
                 btn = `<button disabled class="bg-gray-200 text-gray-400 w-9 h-9 rounded-full flex items-center justify-center cursor-not-allowed"><i class="fa-solid fa-cart-shopping"></i></button>`;
             } else {
-                btn = `<button onclick="showProductDetails('${p.id}')" class="bg-gradient-to-r from-brown-400 to-brown-500 text-white w-9 h-9 rounded-full flex items-center justify-center hover:shadow-md hover:scale-110 transition"><i class="fa-solid fa-cart-shopping"></i></button>`;
+                btn = `<button onclick="showProductDetails('${p.id}')" class="bg-gradient-to-r from-pastel-400 to-pastel-500 text-white w-9 h-9 rounded-full flex items-center justify-center hover:shadow-md hover:scale-110 transition"><i class="fa-solid fa-cart-shopping"></i></button>`;
             }
             
             let detailText = p.details ? p.details : 'ไม่มีรายละเอียด';
-            let readMoreBtn = (p.details && p.details.length > 30) ? `<span onclick="showProductDetails('${p.id}')" class="text-[10px] text-brown-500 font-bold cursor-pointer hover:underline block mt-0.5"><i class="fa-solid fa-circle-chevron-down"></i> อ่านเพิ่มเติม</span>` : '';
+            let readMoreBtn = (p.details && p.details.length > 30) ? `<span onclick="showProductDetails('${p.id}')" class="text-[10px] text-pastel-500 font-bold cursor-pointer hover:underline block mt-0.5"><i class="fa-solid fa-circle-chevron-down"></i> อ่านเพิ่มเติม</span>` : '';
 
             return `
                 <div class="glass cute-card p-3 flex flex-col h-full bg-white/60">
@@ -1195,7 +1211,7 @@
                         <img src="${p.image}" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
                         <div class="absolute top-2 right-2">${stockBadge}</div>
                     </div>
-                    <h3 class="font-bold text-gray-800 text-sm line-clamp-1 px-1 cursor-pointer hover:text-brown-500 transition" onclick="showProductDetails('${p.id}')">${p.name}</h3>
+                    <h3 class="font-bold text-gray-800 text-sm line-clamp-1 px-1 cursor-pointer hover:text-pastel-500 transition" onclick="showProductDetails('${p.id}')">${p.name}</h3>
                     <div class="px-1 mb-2 mt-1 min-h-[35px]">
                         <p class="text-[11px] text-gray-500 line-clamp-2">${detailText}</p>
                         ${readMoreBtn}
@@ -1253,8 +1269,8 @@
             
             cats.forEach(cat => { 
                 let html = `
-                    <div class="mb-10 bg-white/40 p-5 rounded-[2rem] border border-brown-100 shadow-sm">
-                        <h2 class="text-2xl font-extrabold text-brown-600 mb-6 border-b-2 border-brown-200 pb-2">
+                    <div class="mb-10 bg-white/40 p-5 rounded-[2rem] border border-pink-100 shadow-sm">
+                        <h2 class="text-2xl font-extrabold text-pastel-600 mb-6 border-b-2 border-pink-200 pb-2">
                             <i class="fa-solid fa-layer-group mr-2"></i> ${cat}
                         </h2>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
@@ -1279,27 +1295,26 @@
             const box = document.getElementById('inbox-list'); 
             if(!box) return;
             
-            box.innerHTML = '<div class="text-center py-10"><i class="fa-solid fa-spinner fa-spin text-2xl text-brown-400"></i></div>'; 
+            box.innerHTML = '<div class="text-center py-10"><i class="fa-solid fa-spinner fa-spin text-2xl text-pastel-400"></i></div>'; 
             try {
                 const res = await fetchGAS({ action: 'getInbox', userid: currentUser.userid }); 
                 box.innerHTML = ''; 
                 
                 if(res && res.status === 'success' && res.data.length > 0) {
-                    for(let i=0; i<res.data.length; i++) {
-                        let msg = res.data[i];
+                    res.data.forEach(msg => { 
                         const d = new Date(msg.time); 
                         box.innerHTML += `
                             <div class="glass cute-card p-5 bg-white/70 border-2 border-white flex flex-col gap-2">
-                                <div class="flex justify-between items-start border-b border-brown-100 pb-2">
-                                    <h3 class="font-bold text-gray-800"><i class="fa-solid fa-gift text-brown-400 mr-2"></i> ${msg.title}</h3>
+                                <div class="flex justify-between items-start border-b border-pink-100 pb-2">
+                                    <h3 class="font-bold text-gray-800"><i class="fa-solid fa-gift text-pastel-400 mr-2"></i> ${msg.title}</h3>
                                     <span class="text-xs text-gray-400">${d.toLocaleString('th-TH')}</span>
                                 </div>
-                                <div class="text-brown-700 font-medium bg-brown-50 p-3 rounded-[1rem] whitespace-pre-line text-sm border border-brown-200">${msg.message}</div>
+                                <div class="text-pastel-700 font-medium bg-pastel-50 p-3 rounded-[1rem] whitespace-pre-line text-sm border border-pink-200">${msg.message}</div>
                             </div>
                         `; 
-                    }
+                    }); 
                 } else { 
-                    box.innerHTML = '<div class="text-center py-10 text-gray-400"><i class="fa-solid fa-box-open text-3xl mb-2 text-brown-300"></i><br>ยังไม่มีสินค้าในกล่องข้อความค่ะ</div>'; 
+                    box.innerHTML = '<div class="text-center py-10 text-gray-400"><i class="fa-solid fa-box-open text-3xl mb-2 text-pastel-300"></i><br>ยังไม่มีสินค้าในกล่องข้อความค่ะ</div>'; 
                 }
             } catch(e) { 
                 box.innerHTML = '<div class="text-center py-10 text-red-400">โหลดข้อมูลไม่สำเร็จ</div>'; 
@@ -1310,14 +1325,13 @@
             const box = document.getElementById('history-list'); 
             if(!box) return;
             
-            box.innerHTML = '<div class="text-center py-10"><i class="fa-solid fa-spinner fa-spin text-2xl text-brown-400"></i></div>'; 
+            box.innerHTML = '<div class="text-center py-10"><i class="fa-solid fa-spinner fa-spin text-2xl text-pastel-400"></i></div>'; 
             try {
                 const res = await fetchGAS({ action: 'getHistory', userid: currentUser.userid }); 
                 box.innerHTML = ''; 
                 
                 if(res && res.status === 'success' && res.data.length > 0) {
-                    for(let i=0; i<res.data.length; i++) {
-                        let item = res.data[i];
+                    res.data.forEach(item => { 
                         const d = new Date(item.time); 
                         box.innerHTML += `
                             <div class="glass cute-card p-4 bg-white/70 border-2 border-white flex justify-between items-center">
@@ -1325,10 +1339,10 @@
                                     <h3 class="font-bold text-gray-800"><i class="fa-solid fa-circle-check text-green-600 mr-2"></i> ${item.product}</h3>
                                     <span class="text-xs text-gray-400 ml-6">${d.toLocaleString('th-TH')}</span>
                                 </div>
-                                <div class="text-brown-600 font-bold text-lg">${parseFloat(item.price).toFixed(2)} ฿</div>
+                                <div class="text-pastel-600 font-bold text-lg">${parseFloat(item.price).toFixed(2)} ฿</div>
                             </div>
                         `; 
-                    }
+                    }); 
                 } else { 
                     box.innerHTML = '<div class="text-center py-10 text-gray-400">ยังไม่มีประวัติการสั่งซื้อค่ะ</div>'; 
                 }
@@ -1341,9 +1355,7 @@
         // ส่วนของระบบแอดมิน 
         // ----------------------------------------------------
         function switchAdminTab(tab) { 
-            const arr = ['setting', 'manage'];
-            for(let i=0; i<arr.length; i++) {
-                let t = arr[i];
+            ['setting', 'manage'].forEach(t => { 
                 const adminTab = document.getElementById('admin-tab-'+t);
                 if(adminTab) {
                     adminTab.classList.add('hidden'); 
@@ -1352,7 +1364,7 @@
                 if(tabBtn) { 
                     tabBtn.className = (t===tab) ? 'admin-tab-active px-6 py-2.5 rounded-full font-bold shadow transition text-sm' : 'admin-tab-inactive px-6 py-2.5 rounded-full font-medium transition text-sm'; 
                 } 
-            }
+            }); 
             
             const showTab = document.getElementById('admin-tab-'+tab);
             if(showTab) {
@@ -1387,12 +1399,12 @@
                 if(res && res.status === 'success') { 
                     appSettings = settings; 
                     applySettings(); 
-                    Swal.fire({ title: 'สำเร็จ', text: 'บันทึกการตั้งค่าเรียบร้อย', icon: 'success', confirmButtonColor: '#A67C52' }); 
+                    Swal.fire({ title: 'สำเร็จ', text: 'บันทึกการตั้งค่าเรียบร้อย', icon: 'success', confirmButtonColor: '#ff69b4' }); 
                 } else { 
-                    Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: res ? res.message : 'ไม่สามารถบันทึกข้อมูลได้', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                    Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: res ? res.message : 'ไม่สามารถบันทึกข้อมูลได้', icon: 'error', confirmButtonColor: '#ff69b4' }); 
                 }
             } catch (e) { 
-                Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: 'ระบบขัดข้อง', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: 'ระบบขัดข้อง', icon: 'error', confirmButtonColor: '#ff69b4' }); 
             }
         }
         
@@ -1404,11 +1416,10 @@
                 let cat = getVal('man-cat'); 
                 let finalName = getVal('man-name');
                 
-                // ดึงชื่อหมวดหมู่ที่พิมพ์เอง
                 if(cat === 'custom') {
                     cat = getVal('man-cat-custom');
                     if(!cat) {
-                        return Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: 'กรุณาระบุชื่อหมวดหมู่ใหม่ด้วยค่ะ', icon: 'warning', confirmButtonColor: '#A67C52' });
+                        return Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: 'กรุณาระบุชื่อหมวดหมู่ใหม่ด้วยค่ะ', icon: 'warning', confirmButtonColor: '#ff69b4' });
                     }
                 }
                 
@@ -1425,16 +1436,16 @@
                 const res = await fetchGAS({ action: 'adminAddProduct', product: p }); 
                 
                 if(res && res.status === 'success') { 
-                    Swal.fire({ title: 'สำเร็จ', text: res.message, icon: 'success', confirmButtonColor: '#A67C52' }); 
+                    Swal.fire({ title: 'สำเร็จ', text: res.message, icon: 'success', confirmButtonColor: '#ff69b4' }); 
                     if(e.target) e.target.reset(); 
                     fetchAndRenderProducts(); 
                     loadStats(); 
                     toggleAdminProductForm(); 
                 } else { 
-                    Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: res ? res.message : 'เพิ่มสินค้าไม่สำเร็จ', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                    Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: res ? res.message : 'เพิ่มสินค้าไม่สำเร็จ', icon: 'error', confirmButtonColor: '#ff69b4' }); 
                 }
             } catch (e) { 
-                Swal.fire({ title: 'ข้อผิดพลาด!', text: 'ระบบขัดข้อง', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                Swal.fire({ title: 'ข้อผิดพลาด!', text: 'ระบบขัดข้อง', icon: 'error', confirmButtonColor: '#ff69b4' }); 
             }
         }
         
@@ -1445,10 +1456,10 @@
             
             for(let i=0; i<appProducts.length; i++) {
                 let p = appProducts[i];
-                let stockDisp = p.category === 'แอพพรีเมียม' ? `ว่าง: ${p.stock}` : 'สินค้าส่งตรง (ไม่ออโต้)';
+                let stockDisp = p.category === 'แอพพรีเมียม' ? `ว่าง: ${p.stock}` : 'สินค้าพรีออเดอร์';
                 
                 let addStockBtn = p.category === 'แอพพรีเมียม' 
-                    ? `<button onclick="openAddStockModal('${p.id}', '${p.name}')" class="text-brown-500 bg-brown-50 w-9 h-9 rounded-lg hover:bg-brown-500 hover:text-white transition shadow-sm"><i class="fa-solid fa-plus"></i></button>` 
+                    ? `<button onclick="openAddStockModal('${p.id}', '${p.name}')" class="text-pastel-500 bg-pastel-50 w-9 h-9 rounded-lg hover:bg-pastel-500 hover:text-white transition shadow-sm"><i class="fa-solid fa-plus"></i></button>` 
                     : '';
                 
                 let delBtn = '';
@@ -1462,7 +1473,7 @@
                             <img src="${p.image}" class="w-12 h-12 rounded-lg object-cover" loading="lazy">
                             <div class="text-sm font-bold text-gray-800">
                                 ${p.name}
-                                <div class="text-xs text-brown-500">${parseFloat(p.price).toFixed(2)} ฿ | ${stockDisp}</div>
+                                <div class="text-xs text-pastel-500">${parseFloat(p.price).toFixed(2)} ฿ | ${stockDisp}</div>
                             </div>
                         </div>
                         <div class="flex gap-2">
@@ -1482,7 +1493,7 @@
                 inputPlaceholder: 'รหัสที่ 1\nรหัสที่ 2...', 
                 showCancelButton: true, 
                 confirmButtonText: 'บันทึก', 
-                confirmButtonColor: '#A67C52', 
+                confirmButtonColor: '#ff69b4', 
                 customClass: { popup: 'rounded-[2rem]' } 
             });
             
@@ -1497,14 +1508,14 @@
                     }); 
                     
                     if (res && res.status === 'success') { 
-                        Swal.fire({ title: 'สำเร็จ', text: res.message, icon: 'success', confirmButtonColor: '#A67C52' }); 
+                        Swal.fire({ title: 'สำเร็จ', text: res.message, icon: 'success', confirmButtonColor: '#ff69b4' }); 
                         fetchAndRenderProducts(); 
                         loadStats(); 
                     } else { 
-                        Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: res ? res.message : 'เพิ่มสต๊อกไม่สำเร็จ', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                        Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: res ? res.message : 'เพิ่มสต๊อกไม่สำเร็จ', icon: 'error', confirmButtonColor: '#ff69b4' }); 
                     } 
                 } catch(e) { 
-                    Swal.fire({ title: 'ข้อผิดพลาด!', text: 'ระบบขัดข้อง', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                    Swal.fire({ title: 'ข้อผิดพลาด!', text: 'ระบบขัดข้อง', icon: 'error', confirmButtonColor: '#ff69b4' }); 
                 }
             }
         }
@@ -1530,14 +1541,14 @@
                     }); 
                     
                     if(res && res.status === 'success') { 
-                        Swal.fire({ title: 'สำเร็จ', text: res.message, icon: 'success', confirmButtonColor: '#A67C52' }); 
+                        Swal.fire({ title: 'สำเร็จ', text: res.message, icon: 'success', confirmButtonColor: '#ff69b4' }); 
                         fetchAndRenderProducts(); 
                         loadStats(); 
                     } else { 
-                        Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: res ? res.message : 'ลบไม่สำเร็จ', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                        Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: res ? res.message : 'ลบไม่สำเร็จ', icon: 'error', confirmButtonColor: '#ff69b4' }); 
                     } 
                 } catch(e) { 
-                    Swal.fire({ title: 'ข้อผิดพลาด!', text: 'ระบบขัดข้อง', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                    Swal.fire({ title: 'ข้อผิดพลาด!', text: 'ระบบขัดข้อง', icon: 'error', confirmButtonColor: '#ff69b4' }); 
                 }
             } 
         }
@@ -1565,12 +1576,12 @@
                     closeModal('login-modal'); 
                     updateUI(); 
                     renderProductsHome(); 
-                    Swal.fire({ title: 'สำเร็จ', text: 'เข้าสู่ระบบสำเร็จ', icon: 'success', confirmButtonColor: '#A67C52', timer: 1500 }); 
+                    Swal.fire({ title: 'สำเร็จ', text: 'เข้าสู่ระบบสำเร็จ', icon: 'success', confirmButtonColor: '#ff69b4', timer: 1500 }); 
                 } else { 
-                    Swal.fire({ title: 'เข้าสู่ระบบไม่สำเร็จ', text: res ? res.message : 'เชื่อมต่อขัดข้อง', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                    Swal.fire({ title: 'เข้าสู่ระบบไม่สำเร็จ', text: res ? res.message : 'เชื่อมต่อขัดข้อง', icon: 'error', confirmButtonColor: '#ff69b4' }); 
                 } 
             } catch(error) { 
-                Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: 'ระบบขัดข้อง กรุณาลองใหม่', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: 'ระบบขัดข้อง กรุณาลองใหม่', icon: 'error', confirmButtonColor: '#ff69b4' }); 
             }
         }
         
@@ -1581,7 +1592,7 @@
                 const confirmPass = document.getElementById('reg-confirm').value;
                 
                 if(pass !== confirmPass) { 
-                    Swal.fire({ title: 'แจ้งเตือน', text: 'รหัสผ่านไม่ตรงกัน', icon: 'warning', confirmButtonColor: '#A67C52' }); 
+                    Swal.fire({ title: 'แจ้งเตือน', text: 'รหัสผ่านไม่ตรงกัน', icon: 'warning', confirmButtonColor: '#ff69b4' }); 
                     return; 
                 } 
                 
@@ -1604,12 +1615,12 @@
                     updateUI(); 
                     renderProductsHome(); 
                     loadStats(); 
-                    Swal.fire({ title: 'สำเร็จ', text: 'สมัครสมาชิกสำเร็จ', icon: 'success', confirmButtonColor: '#A67C52' }); 
+                    Swal.fire({ title: 'สำเร็จ', text: 'สมัครสมาชิกสำเร็จ', icon: 'success', confirmButtonColor: '#ff69b4' }); 
                 } else { 
-                    Swal.fire({ title: 'สมัครไม่สำเร็จ', text: res ? res.message : 'ข้อมูลซ้ำหรือเชื่อมต่อขัดข้อง', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                    Swal.fire({ title: 'สมัครไม่สำเร็จ', text: res ? res.message : 'ข้อมูลซ้ำหรือเชื่อมต่อขัดข้อง', icon: 'error', confirmButtonColor: '#ff69b4' }); 
                 } 
             } catch(error) { 
-                Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: 'ระบบขัดข้อง กรุณาลองใหม่', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: 'ระบบขัดข้อง กรุณาลองใหม่', icon: 'error', confirmButtonColor: '#ff69b4' }); 
             }
         }
         
@@ -1650,12 +1661,12 @@
                         updateUI(); 
                         loadStats(); 
                         if(e.target) e.target.reset(); 
-                        Swal.fire({ title: 'สำเร็จ', text: res.message, icon: 'success', confirmButtonColor: '#A67C52' }); 
+                        Swal.fire({ title: 'สำเร็จ', text: res.message, icon: 'success', confirmButtonColor: '#ff69b4' }); 
                     } else { 
-                        Swal.fire({ title: 'แจ้งเตือน', text: res ? res.message : 'ทำรายการไม่สำเร็จ', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                        Swal.fire({ title: 'แจ้งเตือน', text: res ? res.message : 'ทำรายการไม่สำเร็จ', icon: 'error', confirmButtonColor: '#ff69b4' }); 
                     } 
                 } catch(error) { 
-                    Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: 'อัปโหลดไม่สำเร็จ', icon: 'error', confirmButtonColor: '#A67C52' }); 
+                    Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: 'อัปโหลดไม่สำเร็จ', icon: 'error', confirmButtonColor: '#ff69b4' }); 
                 }
             }; 
             reader.readAsDataURL(file); 
