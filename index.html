@@ -2,10 +2,19 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>beamstore</title>
     
-    <link rel="icon" type="image/jpeg" href="https://img2.pic.in.th/2b8f301abf20d918faf512ee0dbf9271.jpeg">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="beamstore">
+    <meta name="apple-mobile-web-app-title" content="beamstore">
+    <meta name="theme-color" content="#ff69b4">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://img5.pic.in.th/file/secure-sv1/att.i1s38Cu-IFqrlbGTaNvM6-nuYcIxY7Lpbo_5RvdcKE06b4430a162bd4559.jpeg">
+    <link rel="manifest" href='data:application/manifest+json;utf-8,%7B%22name%22%3A%22beamstore%22%2C%22short_name%22%3A%22beamstore%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23fff0f5%22%2C%22theme_color%22%3A%22%23ff69b4%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fimg5.pic.in.th%2Ffile%2Fsecure-sv1%2Fatt.i1s38Cu-IFqrlbGTaNvM6-nuYcIxY7Lpbo_5RvdcKE06b4430a162bd4559.jpeg%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fjpeg%22%7D%5D%7D'>
+    
+    <link rel="icon" type="image/jpeg" href="https://img5.pic.in.th/file/secure-sv1/att.i1s38Cu-IFqrlbGTaNvM6-nuYcIxY7Lpbo_5RvdcKE06b4430a162bd4559.jpeg">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,6 +55,8 @@
             display: flex; 
             flex-direction: column; 
             overflow-x: hidden; 
+            /* กันผู้ใช้ซูมจอเองในมือถือ */
+            touch-action: pan-y;
         }
         
         .glass { 
@@ -80,6 +91,7 @@
             -webkit-text-fill-color: transparent; 
         }
         
+        /* Marquee Animation */
         .marquee-wrapper { 
             width: 100%; 
             overflow: hidden; 
@@ -103,6 +115,7 @@
             100% { transform: translateX(-100%); } 
         }
 
+        /* SweetAlert Styling - Pink Theme */
         .swal2-popup { 
             border-radius: 2rem !important; 
             background: #fff0f5 !important; 
@@ -146,7 +159,7 @@
         <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
             
             <div class="flex items-center gap-3 cursor-pointer hover:scale-105 transition" onclick="navigate('home')">
-                <img id="nav-logo" src="https://img2.pic.in.th/2b8f301abf20d918faf512ee0dbf9271.jpeg" class="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md" loading="lazy">
+                <img id="nav-logo" src="https://img5.pic.in.th/file/secure-sv1/att.i1s38Cu-IFqrlbGTaNvM6-nuYcIxY7Lpbo_5RvdcKE06b4430a162bd4559.jpeg" class="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md" loading="lazy">
                 <span id="nav-title" class="text-2xl font-bold bg-gradient-to-r from-pastel-400 to-pastel-600 text-gradient fade-transition tracking-wide">beamstore</span>
             </div>
             
