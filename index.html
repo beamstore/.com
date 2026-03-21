@@ -302,7 +302,7 @@
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-5" id="product-container">
                 <div class="col-span-full text-center py-10 text-gray-400">
-                    <i class="fa-solid fa-spinner fa-spin text-4xl text-pastel-400 mb-3"></i><br>กำลังจัดเรียงสินค้า...
+                    <i class="fa-solid fa-spinner fa-spin text-4xl text-pastel-400 mb-3"></i><br>กำลังโหลดสินค้า...
                 </div>
             </div>
         </div>
@@ -438,6 +438,8 @@
                             
                             <textarea id="man-detail" rows="2" placeholder="รายละเอียดสินค้า" class="w-full p-3 rounded-[1rem] outline-none shadow-sm border border-pink-100 text-gray-700"></textarea>
                             
+                            <input type="number" id="man-sort" placeholder="ลำดับจัดเรียง (เลขน้อยอยู่บน) ไม่ใส่ก็ได้" class="w-full p-3 rounded-[1rem] outline-none shadow-sm border border-pink-100 text-gray-700">
+
                             <textarea id="man-stock" rows="3" placeholder="สต๊อก (1 รหัสต่อ 1 บรรทัด)" class="w-full p-3 rounded-[1rem] outline-none shadow-sm border border-pink-100 text-gray-700"></textarea>
                             
                             <button type="submit" class="w-full bg-pastel-400 text-white py-3 rounded-[1rem] font-bold hover:bg-pastel-500 transition shadow">
@@ -1173,7 +1175,7 @@
         }
 
         // ----------------------------------------------------
-        // เรนเดอร์หน้าจอแสดงสินค้า (และจัดเรียง)
+        // 6. การจัดเรียงและเรนเดอร์หน้าจอ (จัดเรียงด้วยคอลัมน์ SortOrder)
         // ----------------------------------------------------
         function generateProductHTML(p) {
             let stockBadge = ''; 
@@ -1234,10 +1236,14 @@
             `;
         }
         
-        // ฟังก์ชันช่วยเรียงลำดับสินค้า (เลขน้อยไปมาก และ ตัวอักษร ก-ฮ)
+        // 🟢 ฟังก์ชันจัดเรียงตามเลข SortOrder ที่ดึงจาก Backend
         function sortProducts(productsArray) {
             return productsArray.sort((a, b) => {
-                return a.name.localeCompare(b.name, 'th', { numeric: true, sensitivity: 'base' });
+                if (a.sortOrder !== b.sortOrder) {
+                    return a.sortOrder - b.sortOrder; // เรียงเลขน้อยไปมาก
+                }
+                // ถ้าเลขเท่ากัน หรือเป็น 9999 เหมือนกัน ให้เรียงตามชื่อ ก-ฮ
+                return a.name.localeCompare(b.name, 'th');
             });
         }
 
@@ -1245,8 +1251,7 @@
             try {
                 const resProd = await fetchGAS({action: 'getProducts'});
                 if(resProd && resProd.status === 'success') { 
-                    // ทำการจัดเรียงสินค้าที่ได้รับมาทันที
-                    appProducts = sortProducts(resProd.data); 
+                    appProducts = sortProducts(resProd.data); // เรียงตาม SortOrder 
                     renderProductsHome(); 
                     renderAdminProductList(); 
                 }
@@ -1294,9 +1299,8 @@
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
                 `; 
                 
-                // ดึงสินค้าในหมวดหมู่ และจัดเรียง
+                // ดึงสินค้าในหมวดหมู่ 
                 let catProducts = appProducts.filter(p => (p.category ? p.category.trim() : 'อื่นๆ') === cat);
-                catProducts = sortProducts(catProducts);
                 
                 for(let i=0; i<catProducts.length; i++) {
                     html += generateProductHTML(catProducts[i]); 
@@ -1308,7 +1312,7 @@
         }
 
         // ----------------------------------------------------
-        // ระบบประวัติ และ กล่องข้อความ
+        // 7. ระบบประวัติ และ กล่องข้อความ
         // ----------------------------------------------------
         async function fetchInbox() { 
             const box = document.getElementById('inbox-list'); 
@@ -1371,7 +1375,7 @@
         }
 
         // ----------------------------------------------------
-        // ส่วนของระบบแอดมิน 
+        // 8. ส่วนของระบบแอดมิน (เพิ่มปุ่มแก้ไขสินค้า)
         // ----------------------------------------------------
         function switchAdminTab(tab) { 
             ['setting', 'manage'].forEach(t => { 
@@ -1449,6 +1453,7 @@
                     img: getVal('man-img'), 
                     details: getVal('man-detail'), 
                     stockData: getVal('man-stock'), 
+                    sortOrder: getVal('man-sort'), // เพิ่มฟิลด์จัดเรียง
                     type: 'manual' 
                 }; 
                 
@@ -1481,8 +1486,11 @@
                     ? `<button onclick="openAddStockModal('${p.id}', '${p.name}')" class="text-pastel-500 bg-pastel-50 w-9 h-9 rounded-lg hover:bg-pastel-500 hover:text-white transition shadow-sm"><i class="fa-solid fa-plus"></i></button>` 
                     : '';
                 
+                let editBtn = '';
                 let delBtn = '';
+                
                 if (currentUser && (currentUser.role === 'admin' || currentUser.role === 'b')) {
+                    editBtn = `<button onclick="openEditProductModal('${p.id}')" class="text-blue-500 bg-blue-50 w-9 h-9 rounded-lg hover:bg-blue-500 hover:text-white transition shadow-sm"><i class="fa-solid fa-pen"></i></button>`;
                     delBtn = `<button onclick="adminDeleteProduct('${p.id}')" class="text-red-400 bg-red-50 w-9 h-9 rounded-lg hover:bg-red-500 hover:text-white transition shadow-sm"><i class="fa-solid fa-trash"></i></button>`;
                 }
                 
@@ -1497,6 +1505,7 @@
                         </div>
                         <div class="flex gap-2">
                             ${addStockBtn}
+                            ${editBtn}
                             ${delBtn}
                         </div>
                     </div>
@@ -1539,6 +1548,55 @@
             }
         }
         
+        async function openEditProductModal(id) {
+            const p = appProducts.find(x => x.id === id);
+            if (!p) return;
+
+            // ตรวจสอบค่าจัดเรียง ถ้าเป็น 9999 ให้ช่องว่างเปล่า
+            let defaultSort = p.sortOrder == 9999 ? '' : p.sortOrder;
+
+            const { value: formValues } = await Swal.fire({
+                title: 'แก้ไขสินค้า',
+                html: `
+                    <input id="edit-name" class="swal2-input w-[85%] text-sm" value="${p.name}" placeholder="ชื่อสินค้า">
+                    <input id="edit-img" class="swal2-input w-[85%] text-sm mt-2" value="${p.image}" placeholder="URL รูป">
+                    <input id="edit-price" type="number" step="0.01" class="swal2-input w-[85%] text-sm mt-2" value="${p.price}" placeholder="ราคา">
+                    <input id="edit-sort" type="number" class="swal2-input w-[85%] text-sm mt-2" value="${defaultSort}" placeholder="ลำดับการจัดเรียง (เลขน้อยอยู่บน)">
+                    <textarea id="edit-detail" class="swal2-textarea w-[85%] text-sm mt-2" placeholder="รายละเอียด">${p.details}</textarea>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'บันทึกการแก้ไข',
+                confirmButtonColor: '#ff69b4',
+                customClass: { popup: 'rounded-[2rem]' },
+                preConfirm: () => {
+                    return {
+                        id: p.id,
+                        name: document.getElementById('edit-name').value,
+                        img: document.getElementById('edit-img').value,
+                        price: document.getElementById('edit-price').value,
+                        sortOrder: document.getElementById('edit-sort').value,
+                        details: document.getElementById('edit-detail').value
+                    }
+                }
+            });
+
+            if (formValues) {
+                try {
+                    Swal.fire({ title: 'กำลังบันทึก...', didOpen: () => Swal.showLoading() });
+                    const res = await fetchGAS({ action: 'adminEditProduct', product: formValues });
+                    
+                    if (res && res.status === 'success') {
+                        Swal.fire({ title: 'สำเร็จ', text: res.message, icon: 'success', confirmButtonColor: '#ff69b4' });
+                        fetchAndRenderProducts();
+                    } else {
+                        Swal.fire({ title: 'เกิดข้อผิดพลาด!', text: res ? res.message : 'แก้ไขไม่สำเร็จ', icon: 'error', confirmButtonColor: '#ff69b4' });
+                    }
+                } catch(e) {
+                    Swal.fire({ title: 'ข้อผิดพลาด!', text: 'ระบบขัดข้อง', icon: 'error', confirmButtonColor: '#ff69b4' });
+                }
+            }
+        }
+
         async function adminDeleteProduct(id) { 
             const { isConfirmed } = await Swal.fire({ 
                 title: 'ลบสินค้านี้?', 
@@ -1573,7 +1631,7 @@
         }
 
         // ----------------------------------------------------
-        // ระบบบัญชี (Login, Register, Topup) ปลอดภัย 100%
+        // 9. ระบบบัญชี (Login, Register, Topup) ปลอดภัย 100%
         // ----------------------------------------------------
         async function handleLogin(e) { 
             e.preventDefault(); 
